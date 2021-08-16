@@ -1,3 +1,3 @@
-## My first Sreamlit project, it's very awesome
+You can reach the professor's project [here](https://share.streamlit.io/misraturp/my-awesome-streamlit-front-end/main.py) and her github repository [here](https://github.com/misraturp/my-awesome-streamlit-front-end).
 
-[You can reach the application here.](https://share.streamlit.io/misraturp/my-awesome-streamlit-front-end/main.py)
+I made a small adjustment. Instead of the user typing the input feature, I put the columns inside a box selector to be selected one column as input feature.
