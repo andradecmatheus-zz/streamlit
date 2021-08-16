@@ -21,7 +21,7 @@ selected_year = st.sidebar.selectbox('Year', list(reversed(range(1990,2020))))
 @st.cache
 def load_data(year):
     url = "https://www.pro-football-reference.com/years/" + str(year) + "/rushing.htm"
-    html = pd.read_html(url, header = 1)
+    html = pd.read_html(url, header = 1) # Read HTML tables into a list of DataFrame objects.
     df = html[0]
     raw = df.drop(df[df.Age == 'Age'].index) # Deletes repeating headers in content
     raw = raw.fillna(0)
@@ -66,4 +66,4 @@ if st.button('Intercorrelation Heatmap'):
     with sns.axes_style("white"):
         f, ax = plt.subplots(figsize=(7, 5))
         ax = sns.heatmap(corr, mask=mask, vmax=1, square=True)
-    st.pyplot()
+    st.pyplot(f)

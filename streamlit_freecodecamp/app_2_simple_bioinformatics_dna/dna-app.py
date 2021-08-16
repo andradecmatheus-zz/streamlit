@@ -17,9 +17,7 @@ st.image(image, use_column_width=True)
 
 st.write("""
 # DNA Nucleotide Count Web App
-
 This app counts the nucleotide composition of query DNA!
-
 ***
 """)
 

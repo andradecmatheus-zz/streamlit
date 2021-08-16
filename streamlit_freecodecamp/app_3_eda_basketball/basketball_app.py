@@ -20,7 +20,7 @@ selected_year = st.sidebar.selectbox('Year', list(reversed(range(1950,2020))))
 @st.cache
 def load_data(year):
     url = "https://www.basketball-reference.com/leagues/NBA_" + str(year) + "_per_game.html"
-    html = pd.read_html(url, header = 0)
+    html = pd.read_html(url, header = 0) # Read HTML tables into a list of DataFrame objects.
     df = html[0]
     raw = df.drop(df[df.Age == 'Age'].index) # Deletes repeating headers in content
     raw = raw.fillna(0)
@@ -28,8 +28,10 @@ def load_data(year):
     return playerstats
 playerstats = load_data(selected_year)
 
+
+
 # Sidebar - Team selection
-sorted_unique_team = sorted(playerstats.Tm.unique())
+sorted_unique_team = sorted(playerstats.Tm.unique()) # tm = team
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
 
 # Sidebar - Position selection
@@ -41,6 +43,7 @@ df_selected_team = playerstats[(playerstats.Tm.isin(selected_team)) & (playersta
 
 st.header('Display Player Stats of Selected Team(s)')
 st.write('Data Dimension: ' + str(df_selected_team.shape[0]) + ' rows and ' + str(df_selected_team.shape[1]) + ' columns.')
+df_selected_team= df_selected_team.astype(str) # https://github.com/wesm/feather/issues/349
 st.dataframe(df_selected_team)
 
 # Download NBA player stats data
@@ -65,4 +68,4 @@ if st.button('Intercorrelation Heatmap'):
     with sns.axes_style("white"):
         f, ax = plt.subplots(figsize=(7, 5))
         ax = sns.heatmap(corr, mask=mask, vmax=1, square=True)
-    st.pyplot()
+    st.pyplot(f)

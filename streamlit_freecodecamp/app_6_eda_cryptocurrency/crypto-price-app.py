@@ -30,7 +30,7 @@ This app retrieves cryptocurrency prices for the top 100 cryptocurrency from the
 """)
 #---------------------------------#
 # About
-expander_bar = st.beta_expander("About")
+expander_bar = st.expander("About")
 expander_bar.markdown("""
 * **Python libraries:** base64, pandas, streamlit, numpy, matplotlib, seaborn, BeautifulSoup, requests, json, time
 * **Data source:** [CoinMarketCap](http://coinmarketcap.com).
@@ -42,7 +42,7 @@ expander_bar.markdown("""
 # Page layout (continued)
 ## Divide page to 3 columns (col1 = sidebar, col2 and col3 = page contents)
 col1 = st.sidebar
-col2, col3 = st.beta_columns((2,1))
+col2, col3 = st.columns((2,1))
 
 #---------------------------------#
 # Sidebar + Main panel
@@ -77,11 +77,12 @@ def load_data():
       coin_name.append(i['slug'])
       coin_symbol.append(i['symbol'])
       price.append(i['quote'][currency_price_unit]['price'])
-      percent_change_1h.append(i['quote'][currency_price_unit]['percent_change_1h'])
-      percent_change_24h.append(i['quote'][currency_price_unit]['percent_change_24h'])
-      percent_change_7d.append(i['quote'][currency_price_unit]['percent_change_7d'])
-      market_cap.append(i['quote'][currency_price_unit]['market_cap'])
-      volume_24h.append(i['quote'][currency_price_unit]['volume_24h'])
+      percent_change_1h.append(i['quote'][currency_price_unit]['percentChange1h'])
+      percent_change_24h.append(i['quote'][currency_price_unit]['percentChange24h'])
+      percent_change_7d.append(i['quote'][currency_price_unit]['percentChange7d'])
+      market_cap.append(i['quote'][currency_price_unit]['marketCap'])
+      volume_24h.append(i['quote'][currency_price_unit]['volume24h'])
+
 
     df = pd.DataFrame(columns=['coin_name', 'coin_symbol', 'market_cap', 'percent_change_1h', 'percent_change_24h', 'percent_change_7d', 'price', 'volume_24h'])
     df['coin_name'] = coin_name
