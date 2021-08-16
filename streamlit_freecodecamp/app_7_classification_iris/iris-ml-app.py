@@ -49,5 +49,4 @@ st.subheader('Prediction Probability')
 st.write(prediction_proba)
 
 st.subheader('Understanding the Result')
-underline = '\033[4m'
-st.write('The input flower is most likely to be {}, with a {}% of probability.'.format(iris.target_names[prediction][0], prediction_proba.max()) )
+st.write('The input flower is most likely to be of {} type, with a {}% of probability.'.format(iris.target_names[prediction][0], prediction_proba.max()) )

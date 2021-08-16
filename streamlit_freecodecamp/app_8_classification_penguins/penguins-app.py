@@ -19,6 +19,7 @@ st.sidebar.markdown("""
 """)
 
 # Collects user input features into dataframe
+st.sidebar.subheader('Import the file as CSV format')
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
     input_df = pd.read_csv(uploaded_file)
@@ -38,6 +39,8 @@ else:
                 'sex': sex}
         features = pd.DataFrame(data, index=[0])
         return features
+    st.sidebar.markdown("""\n""")
+    st.sidebar.subheader('Or directly input the parameters')
     input_df = user_input_features()
 
 # Combines user input features with entire penguins dataset
@@ -68,7 +71,7 @@ else:
 load_clf = pickle.load(open('penguins_clf.pkl', 'rb'))
 
 # Apply model to make predictions
-prediction = load_clf.predict(df)
+prediction = load_clf.predict(df) # df is input features
 prediction_proba = load_clf.predict_proba(df)
 
 
@@ -78,3 +81,6 @@ st.write(penguins_species[prediction])
 
 st.subheader('Prediction Probability')
 st.write(prediction_proba)
+
+st.subheader('Understanding the Result')
+st.write('The input peguin is most likely to be of {} specie, with a {}% of probability.'.format(penguins_species[prediction][0], prediction_proba.max()) )
