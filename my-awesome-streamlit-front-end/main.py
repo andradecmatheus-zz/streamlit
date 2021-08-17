@@ -26,7 +26,6 @@ st.markdown(
 @st.cache 
 def get_data(filename):
 	taxi_data = pd.read_csv(filename)
-
 	return taxi_data
 
 
@@ -39,8 +38,8 @@ with dataset:
 	st.header("NYC taxi dataset")
 	st.text('I found this dataset on blablabla.com, ...')
 
-	taxi_data = get_data("data/taxi_data.csv")
-	st.write(taxi_data.head()) #1:29
+	taxi_data = get_data('data/taxi_data.csv')
+	#st.write(taxi_data.head()) #1:29
 
 	st.subheader('Pick-up location ID distribution on the NYC dataset') # add a title to bar_chart
 	pulocation_dist = pd.DataFrame(taxi_data['PULocationID'].value_counts()).head(50)
