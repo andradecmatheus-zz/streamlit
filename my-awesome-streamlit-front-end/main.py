@@ -38,7 +38,7 @@ with dataset:
 	st.header("NYC taxi dataset")
 	st.text('I found this dataset on blablabla.com, ...')
 
-	taxi_data = get_data('data/taxi_data.csv')
+	taxi_data = get_data('my-awesome-streamlit-front-end/data/taxi_data.csv') # or only 'data/taxi_data.csv' for without share.streamlit
 	#st.write(taxi_data.head()) #1:29
 
 	st.subheader('Pick-up location ID distribution on the NYC dataset') # add a title to bar_chart
