@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 import pickle
 from PIL import Image
-from rdkit import Chem
+from rdkit import Chem # $ pip install rdkit-pypi from https://pypi.org/project/rdkit-pypi/
 from rdkit.Chem import Descriptors
 
 ######################
@@ -84,7 +84,7 @@ st.sidebar.header('User Input Features')
 SMILES_input = "NCCCC\nCCC\nCN"
 
 SMILES = st.sidebar.text_area("SMILES input", SMILES_input)
-SMILES = "C\n" + SMILES #Adds C as a dummy, first item
+SMILES = "C\n" + SMILES #Adds C as a dummy, first item  ## in order to work with a single smile_input
 SMILES = SMILES.split('\n')
 
 st.header('Input SMILES')
@@ -100,7 +100,7 @@ X[1:] # Skips the dummy first item
 ######################
 
 # Reads in saved model
-load_model = pickle.load(open('solubility_model.pkl', 'rb'))
+load_model = pickle.load(open('solubility_model-py.pkl', 'rb'))
 
 # Apply model to make predictions
 prediction = load_model.predict(X)

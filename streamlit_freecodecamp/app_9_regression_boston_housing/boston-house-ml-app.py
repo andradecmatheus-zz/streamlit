@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
-import shap
+import shap # $ pip install shap # it will provide the understanding behind prediction
 import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.ensemble import RandomForestRegressor
+import pickle
 
 st.write("""
 # Boston House Price Prediction App
@@ -14,8 +15,8 @@ st.write('---')
 
 # Loads the Boston House Price Dataset
 boston = datasets.load_boston()
-X = pd.DataFrame(boston.data, columns=boston.feature_names)
-Y = pd.DataFrame(boston.target, columns=["MEDV"])
+X = pd.DataFrame(boston.data, columns=boston.feature_names) # independent / x variables (input features)
+Y = pd.DataFrame(boston.target, columns=["MEDV"]) # target
 
 # Sidebar
 # Header of Specify Input Parameters
@@ -60,11 +61,15 @@ st.header('Specified Input parameters')
 st.write(df)
 st.write('---')
 
-# Build Regression Model
-model = RandomForestRegressor()
-model.fit(X, Y)
-# Apply Model to Make Prediction
-prediction = model.predict(df)
+# -------- as homework: to generate the model in another file and save it as pickle file
+# done
+
+# Reads in saved classification model
+load_model = pickle.load(open('boston_regr.pkl', 'rb'))
+
+
+# Apply model to make predictions
+prediction = load_model.predict(df) # df is input features
 
 st.header('Prediction of MEDV')
 st.write(prediction)
@@ -72,11 +77,14 @@ st.write('---')
 
 # Explaining the model's predictions using SHAP values
 # https://github.com/slundberg/shap
-explainer = shap.TreeExplainer(model)
+explainer = shap.TreeExplainer(load_model)
 shap_values = explainer.shap_values(X)
 
+# to disable 'st.pyplot() without any arguments' warning
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 st.header('Feature Importance')
-plt.title('Feature importance based on SHAP values')
+plt.title('Feature importance based on SHAP values') # see the feature contribution in positive and negative aspects
 shap.summary_plot(shap_values, X)
 st.pyplot(bbox_inches='tight')
 st.write('---')
