@@ -29,10 +29,11 @@ def clean_education(x):
         return 'Post grad'
     return 'Less than a Bachelors'
 
-
 @st.cache
 def load_data():
-    df = pd.read_csv("survey_results_public.csv")
+    #df = pd.read_csv("data/df_sample.csv")
+    # how to read CSV on clouds https://redash.io/help/data-sources/querying/csv-files
+    df = pd.read_csv("https://drive.google.com/uc?id=1cA4jYmHU7MYSi5DthD5R1l4iIjhsVj0t")
     df = df[["Country", "EdLevel", "YearsCodePro", "Employment", "ConvertedComp"]]
     df = df[df["ConvertedComp"].notnull()]
     df = df.dropna()
@@ -61,6 +62,7 @@ def show_explore_page():
     """
     )
 
+    # Pie Chart of Countries
     data = df["Country"].value_counts()
 
     fig1, ax1 = plt.subplots()
@@ -68,24 +70,25 @@ def show_explore_page():
     ax1.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
 
     st.write("""#### Number of Data from different countries""")
-
     st.pyplot(fig1)
     
+
+    # Bar chart of Salary x Country
     st.write(
         """
     #### Mean Salary Based On Country
     """
     )
-
+    # group df by Country and acess each Salary...
     data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
     st.bar_chart(data)
 
+
+    # Line chart of Salary x years of code
     st.write(
         """
     #### Mean Salary Based On Experience
     """
     )
-
     data = df.groupby(["YearsCodePro"])["Salary"].mean().sort_values(ascending=True)
     st.line_chart(data)
-
