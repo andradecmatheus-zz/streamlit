@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import numpy as np
+import sklearn
 
 def load_model():
 	with open('ml-app-salaryprediction/saved_steps.pkl', 'rb') as file: # or 'saved_steps.pkl' for without share.streaming
