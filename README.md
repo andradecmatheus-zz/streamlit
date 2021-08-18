@@ -1,6 +1,6 @@
 # Streamlit Projects
 
-Compilation of Streamlit projects where I practice those skills.
+Compilation of Streamlit projects where I practice these skills.
 
 <br>
 
